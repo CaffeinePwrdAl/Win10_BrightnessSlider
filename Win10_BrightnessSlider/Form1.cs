@@ -64,14 +64,6 @@ namespace Win10_BrightnessSlider
                 Application.Exit();
             });
 
-            var mi2 = new MenuItem("State Of Window", (snd, ev) => {
-                var msg =
-                "visible:" + this.Visible + "\r\n" +
-                "Focused:" + this.Focused + "\r\n" +
-                "canFocus:" + this.CanFocus + "\r\n";
-                MessageBox.Show(msg);
-            });
-
             var mi3 = new MenuItem("Run At Startup", (snd, ev) => {
                 var _mi3 = snd as MenuItem;
 
@@ -80,11 +72,45 @@ namespace Win10_BrightnessSlider
                 SetStartup(_mi3.Checked);
             });
 
+            var miVersion = new MenuItem("Version 1.03 CP", (snd, ev) =>
+            {
+                var msg =
+                "Win10_BrightnessSlider\n\n" +
+                "Version: 1.03 " +
+                #if DEBUG
+                    "(Debug Build)" +
+                #else
+                    "(Release Build)" +
+                #endif
+                "\n\n" +
+                "Github:\n" +
+                "    https://github.com/CaffinePwrdAl/Win10_BrightnessSlider\n\n" +
+                "Fork Author:\n" +
+                "    https://github.com/CaffeinePwrdAl\n\n" +
+                "Original Author:\n" +
+                "    https://github.com/blackholeearth/Win10_BrightnessSlider\n\n" +
+                "Full thanks and credit to blackholeearth for making a great\n" +
+                "little program that I use on a daily basis and putting it out\n" +
+                "on github for me to play with!";
+
+                MessageBox.Show(msg, "About");
+            });
+
             cm.MenuItems.Add(mi1);
+            cm.MenuItems.Add(miVersion);
             cm.MenuItems.Add(mi3);
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
+                var mi2 = new MenuItem("State Of Window", (snd, ev) => {
+                    var msg =
+                    "Visible:" + this.Visible + "\r\n" +
+                    "Focused:" + this.Focused + "\r\n" +
+                    "TopMost:" + this.TopMost + "\r\n" +
+                    "canFocus:" + this.CanFocus + "\r\n";
+                    MessageBox.Show(msg);
+                });
+
                 cm.MenuItems.Add(mi2);
             }
 
@@ -125,9 +151,11 @@ namespace Win10_BrightnessSlider
                 p.Offset(-this.Width, -this.Height);
                 this.Location = p;
 
+                this.TopMost = true;
                 this.Activate();
                 this.Show();
                 this.BringToFront();
+                this.Focus();
 
                 vis = true;
             }
