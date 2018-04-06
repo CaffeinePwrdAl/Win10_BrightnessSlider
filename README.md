@@ -2,7 +2,7 @@
 this app puts a Monitor Brightness icon to on Taskbar Tray. So you can access it with 1 click.
 targeting laptops. 
 
-* **tested on** win10 build 10240 x64.
+* **tested on** win10 build 16299 x64.
 * **tags:** Windows 10 MONITOR Brightness Slider Icon on Taskbar Tray
 
 **Download Link**  [Click Here To Download](/Win10_BrightnessSlider/bin/Release/Win10_BrightnessSlider.exe?raw=true)
@@ -38,6 +38,16 @@ targeting laptops.
 
  
 #### ChangeLog
+##### Fork version
+v1.03
+
+* Uploaded release build rather than debug
+* Made icon tool tip show current brightness level
+* Fixed window being displayed behind the 'Show hidden icons' panel when the tray is open
+* Added version and about screen crediting the original author
+* Tweaked style slightly and made it look more 'Win 10' by using Segoe UI.
+
+##### Original versions
 v1.02
 
 * added: seperately change brightness of multiple monitors.
