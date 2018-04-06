@@ -90,6 +90,13 @@ namespace Win10_BrightnessSlider
 
             notifyIcon1.ContextMenu = cm;
         }
+
+        private void UpdateBrightnessText(int brightness)
+        {
+            label1.Text = brightness + "";
+            notifyIcon1.Text = "Win10 BrightnessSlider - " + brightness + "%";
+        }
+
         private void UpdateStatesOnGuiControls()
         {
             //get current states
@@ -99,10 +106,9 @@ namespace Win10_BrightnessSlider
                 .Checked = isRunSttup;
 
             var initBrig = GetBrightness();
-            label1.Text = initBrig + "";
             trackBar1.Value = initBrig;
+            UpdateBrightnessText(initBrig);
         }
-
 
         bool vis = false;
         public void eSetVis(bool visible)
@@ -131,11 +137,7 @@ namespace Win10_BrightnessSlider
                 this.Location = p;
 
                 vis = false;
-
             }
-
-
-
         }
        
         private void Form1_Deactivate(object sender, EventArgs e)
@@ -155,10 +157,8 @@ namespace Win10_BrightnessSlider
                 eSetVis(!vis);
             }
            
-
             notifyIcon1.MouseClick += NotifyIcon1_MouseClick;
             Deactivate += Form1_Deactivate;
-
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -167,10 +167,8 @@ namespace Win10_BrightnessSlider
             if (byte.TryParse(trackBar1.Value + "", out g))
             {
                 SetBrightness(g);
-                label1.Text = g + "";
+                UpdateBrightnessText(g);
             }
-
-
         }
 
         static void SetBrightness(byte targetBrightness)
@@ -190,6 +188,7 @@ namespace Win10_BrightnessSlider
                 }
             }
         }
+
         static int GetBrightness()
         {
             ManagementScope scope = new ManagementScope("root\\WMI");
@@ -205,7 +204,6 @@ namespace Win10_BrightnessSlider
                         int br = 0;
                         int.TryParse(br_obj+"", out br);
                         return br;
-                        break;
                     }
                 }
             }
